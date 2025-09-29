@@ -227,5 +227,3 @@ RUN git clone --recursive https://github.com/yuki-koyama/mathtoolbox \
  && make install \
  && cd ..  \
  && rm -rf mathtoolbox mathtoolbox_build
-
-RUN wget https://www.vtk.org/files/release/9.4/VTK-9.4.2.tar.gz -O /vtk_9_4_2.tar.gz
