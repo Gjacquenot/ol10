@@ -17,12 +17,11 @@ RUN yum update -y \
     wget \
     which \
     zlib \
- && yum-config-manager --enable ol9_codeready_builder \
+ && yum-config-manager --enable ol10_codeready_builder \
  && yum install -y \
     libstdc++-static \
     zlib-static \
     ninja-build \
- && yum install -y \
     rpmdevtools \
     rpm-build \
     rpm-sign \
@@ -42,7 +41,8 @@ RUN yum update -y \
 # BOOST 1.60
 # DyNaMHoWebsocket uses SSC that relies on the following boost libraries: system thread random chrono
 # libbz2 is required for Boost compilation
-RUN wget http://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.tar.gz -O boost_src.tar.gz \
+
+RUN wget https://archives.boost.io/release/1.78.0/source/boost_1_78_0.tar.gz -O boost_src.tar.gz \
  && mkdir -p boost_src \
  && tar -xzf boost_src.tar.gz --strip 1 -C boost_src \
  && rm -rf boost_src.tar.gz \
@@ -52,11 +52,10 @@ RUN wget http://sourceforge.net/projects/boost/files/boost/1.60.0/boost_1_60_0.t
  && cd .. \
  && rm -rf boost_src
 
-# BOOST Geometry extension
 RUN git clone https://github.com/boostorg/geometry \
  && cd geometry \
- && git checkout 4aa61e59a72b44fb3c7761066d478479d2dd63a0 \
- && cp -rf include/boost/geometry/extensions /opt/boost/include/boost/geometry/. \
+ && git checkout e0d9c79c318abec79d0605ab656378da4451b97e \
+ && cp -rf include/boost/geometry /opt/boost/include/boost/geometry/. \
  && cd .. \
  && rm -rf geometry
 
