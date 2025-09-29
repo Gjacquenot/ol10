@@ -99,24 +99,27 @@ RUN wget https://sourceforge.net/projects/geographiclib/files/distrib/Geographic
  && rm -rf geographiclib.tgz
 
 ENV HDF5_INSTALL=/usr/local/hdf5
-RUN wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-1.8.12/src/hdf5-1.8.12.tar.gz -O hdf5_source.tar.gz \
+RUN wget https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_5/downloads/hdf5-1.14.5.tar.gz -O hdf5_source.tar.gz \
  && mkdir -p HDF5_SRC \
- && tar -xf hdf5_source.tar.gz --strip 1 -C HDF5_SRC \
+ && tar -xf hdf5_source.tar.gz --strip 2 -C HDF5_SRC \
  && mkdir -p HDF5_build \
  && cd HDF5_build \
  && cmake -G"Unix Makefiles" \
-         -D CMAKE_BUILD_TYPE:STRING=Release \
-         -D CMAKE_INSTALL_PREFIX:PATH=${HDF5_INSTALL} \
-         -D BUILD_SHARED_LIBS:BOOL=OFF \
-         -D BUILD_TESTING:BOOL=OFF \
-         -D HDF5_BUILD_TOOLS:BOOL=OFF \
-         -D HDF5_BUILD_EXAMPLES:BOOL=OFF \
-         -D HDF5_BUILD_HL_LIB:BOOL=ON \
-         -D HDF5_BUILD_CPP_LIB:BOOL=ON \
-         -D HDF5_BUILD_FORTRAN:BOOL=OFF \
-         -D CMAKE_C_FLAGS="-fPIC" \
-         -D CMAKE_CXX_FLAGS="-fPIC" \
-         ../HDF5_SRC \
+      -D CMAKE_BUILD_TYPE:STRING=Release \
+      -D CMAKE_INSTALL_PREFIX:PATH=${HDF5_INSTALL} \
+      -D BUILD_SHARED_LIBS:BOOL=OFF \
+      -D BUILD_STATIC_LIBS:BOOL=ON \
+      -D BUILD_TESTING:BOOL=OFF \
+      -D HDF5_BUILD_TOOLS:BOOL=OFF \
+      -D HDF5_BUILD_EXAMPLES:BOOL=OFF \
+      -D HDF5_BUILD_HL_LIB:BOOL=ON \
+      -D HDF5_BUILD_CPP_LIB:BOOL=ON \
+      -D HDF5_BUILD_FORTRAN:BOOL=OFF \
+      -D HDF5_ENABLE_Z_LIB_SUPPORT:BOOL=OFF \
+      -D HDF5_ENABLE_SZIP_SUPPORT:BOOL=OFF \
+      -D CMAKE_C_FLAGS="-fPIC" \
+      -D CMAKE_CXX_FLAGS="-fPIC" \
+      ../HDF5_SRC \
  && make install \
  && cd .. \
  && rm -rf hdf5_source.tar.gz HDF5_SRC HDF5_build
