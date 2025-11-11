@@ -99,7 +99,7 @@ RUN wget https://sourceforge.net/projects/geographiclib/files/distrib/Geographic
  && rm -rf geographiclib.tgz
 
 ENV HDF5_INSTALL=/usr/local/hdf5
-RUN wget https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_5/downloads/hdf5-1.14.5.tar.gz -O hdf5_source.tar.gz \
+RUN wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-1.8.12/src/hdf5-1.8.12.tar.gz -O hdf5_source.tar.gz \
  && mkdir -p HDF5_SRC \
  && tar -xf hdf5_source.tar.gz --strip 2 -C HDF5_SRC \
  && mkdir -p HDF5_build \
