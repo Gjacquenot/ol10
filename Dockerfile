@@ -99,7 +99,7 @@ RUN wget https://sourceforge.net/projects/geographiclib/files/distrib/Geographic
  && rm -rf geographiclib.tgz
 
 ENV HDF5_INSTALL=/usr/local/hdf5
-RUN wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-1.8.12/src/hdf5-1.8.12.tar.gz -O hdf5_source.tar.gz \
+RUN wget https://support.hdfgroup.org/releases/hdf5/v1_14/v1_14_5/downloads/hdf5-1.14.5.tar.gz -O hdf5_source.tar.gz \
  && mkdir -p HDF5_SRC \
  && tar -xf hdf5_source.tar.gz --strip 2 -C HDF5_SRC \
  && mkdir -p HDF5_build \
@@ -124,10 +124,12 @@ RUN wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-1.8.12/src
  && cd .. \
  && rm -rf hdf5_source.tar.gz HDF5_SRC HDF5_build
 
+# https://github.com/garrison/eigen3-hdf5 -> Does not work with HDF5 1.14.5
+# https://github.com/Gjacquenot/eigen3-hdf5 -> Works with HDF5 1.14.5
 RUN cd /opt \
- && git clone https://github.com/garrison/eigen3-hdf5 \
+ && git clone https://github.com/Gjacquenot/eigen3-hdf5 \
  && cd eigen3-hdf5 \
- && git checkout 2c782414251e75a2de9b0441c349f5f18fe929a2
+ && git checkout f3136f6d0dcf2838a82a53c568f8b1cdb1be4b99
 
 # Ipopt
 # http://www.coin-or.org/Ipopt/documentation/node10.html
