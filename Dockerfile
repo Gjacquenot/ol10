@@ -229,3 +229,6 @@ RUN git clone --recursive https://github.com/yuki-koyama/mathtoolbox \
  && make install \
  && cd ..  \
  && rm -rf mathtoolbox mathtoolbox_build
+
+RUN git clone --recursive https://github.com/lstumme/LOTUSim.git && cd LOTUSim && git fetch --all
+
